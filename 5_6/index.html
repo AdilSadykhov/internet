@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript для новичков</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    main {
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: #fff;
+      font-size: 24px;
+      margin-top: 0;
+    }
+    
+    p {
+      color: #666;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+    
+    input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #overlay-content {
+      text-align: center;
+      color: #fff;
+    }
+    
+    #close-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Добро пожаловать в мир JavaScript!</h1>
+  </header>
+    <p>JavaScript (JS) - это язык программирования, который используется для создания интерактивных веб-страниц. Он позволяет добавлять динамическое поведение к вашим сайтам, делая их более интересными и функциональными.</p>
+    <p>JavaScript можно использовать для:</p>
+    <ul>
+      <li>Валидации форм и обработки пользовательского ввода</li>
+      <li>Изменения содержимого веб-страницы без перезагрузки</li>
+      <li>Создания анимаций и эффектов</li>
+      <li>Работы с базами данных и отправки запросов на сервер</li>
+      <li>Разработки игр и многое другое!</li>
+    </ul>
+    <p>Однако, JavaScript не подходит для:</p>
+    <ul>
+      <li>Создания сложных программ или операционных систем</li>
+      <li>Замены серверного программирования</li>
+      <li>Работы с низкоуровневыми задачами, такими как драйверы устройств</li>
+    </ul>
+    <h2>Меню задач:</h2>
+    <p>0) Представьтесь и поприветствуйте:</p>
+    <input type="text" id="nameInput" placeholder="Введите ваше имя">
+    <button onclick="greetUser()">Приветствовать</button>
+    <p id="greeting"></p>
+    
+    <p>1) Введите основание и высоту треугольника, чтобы посчитать его площадь:</p>
+    <input type="text" id="baseInput" placeholder="Основание">
+    <input type="text" id="heightInput" placeholder="Высота">
+    <button onclick="calculateTriangleArea()">Рассчитать площадь</button>
+    <p id="triangleArea"></p>
+    
+    <p>2) Введите 2 строки, чтобы узнать, одинаковой ли они длины:</p>
+    <input type="text" id="string1Input" placeholder="Строка 1">
+    <input type="text" id="string2Input" placeholder="Строка 2">
+    <button onclick="compareStrings()">Сравнить</button>
+    <p id="comparisonResult"></p>
+
+    <p>3) Минимальное и максимальное значение массива</p>
+    <input type="text" id="arrayInput" placeholder="Элементы массива через запятую">
+    <button onclick="findMinMax()">Найти минимум и максимум</button>
+    <p id="minMaxResult"></p>
+
+    <p>4) Тест по JavaScript</p>
+    <button onclick="startTest()">Начать тест</button>
+    <div id="testQuestions" style="display: none;">
+    <p id="question"></p>
+    <input type="radio" id="option1" name="answer" value="1">
+    <label for="option1" id="option1Label"></label><br>
+    <input type="radio" id="option2" name="answer" value="2">
+    <label for="option2" id="option2Label"></label><br>
+    <input type="radio" id="option3" name="answer" value="3">
+    <label for="option3" id="option3Label"></label><br>
+    <input type="radio" id="option4" name="answer" value="4">
+    <label for="option4" id="option4Label"></label><br>
+    <button onclick="nextQuestion()">Следующий вопрос</button>
+    </div>
+    <p id="testResult" style="display: none;"></p>
+  
+    <p>5) Заставка</p>
+    <button onclick="showOverlay()">Показать заставку</button>
+    <div id="overlay" style="display: none;">
+      <div id="content">
+        <h3>Добро пожаловать, <span id="userName"></span>!</h3>
+        <h3>Текущая дата: <span id="currentDate"></span></h3>
+      </div>
+    </div>
+
+    <script>
+
+// 0) Приветствие пользователя
+  function greetUser() {
+    var name = document.getElementById("nameInput").value;
+    
+    document.getElementById("greeting").innerHTML = "Привет, " + name + "!";
+  }
+
+// 1) Вычисление площади прямоугольника
+    function calculateTriangleArea() {
+      var base = document.getElementById("baseInput").value;
+      var height = document.getElementById("heightInput").value;
+    
+      var area = (base * height) / 2;
+    
+      document.getElementById("triangleArea").innerHTML = "Площадь треугольника: " + area;
+    }
+
+// 2) Сравнение строк
+    function compareStrings() {
+      var string1 = document.getElementById("string1Input").value;
+      var string2 = document.getElementById("string2Input").value;
+      
+      if (string1.length === string2.length) {
+        document.getElementById("comparisonResult").innerHTML = "true";
+      } else {
+        document.getElementById("comparisonResult").innerHTML = "false";
+      }
+    }
+    
+// 3) Минимальное и максимальное значение массива
+    function findMinMax() {
+      var arrayInput = document.getElementById("arrayInput").value;
+      var array = arrayInput.split(",");
+      
+      var min = Math.min.apply(null, array);
+      var max = Math.max.apply(null, array);
+      
+      document.getElementById("minMaxResult").innerHTML = "Минимум: " + min + "<br>Максимум: " + max;
+    }
+
+// 4) Тест по JS
+var questions = [
+  {
+    question: "1) Какое ключевое слово используется для объявления переменной в JavaScript?",
+    options: ["var", "let", "const", "variable"],
+    correctAnswer: 1
+  },
+  {
+    question: "2) Какой оператор используется для сравнения значений и типов в JavaScript?",
+    options: ["==", "===", "=", "!="],
+    correctAnswer: 2
+  },
+  {
+    question: "3) Что такое DOM в JavaScript?",
+    options: ["Document Object Model", "Data Object Model", "Document Oriented Model", "Data Oriented Model"],
+    correctAnswer: 1
+  },
+  {
+    question: "4) Какой метод используется для добавления элемента в конец массива в JavaScript?",
+    options: ["push()", "pop()", "shift()", "unshift()"],
+    correctAnswer: 1
+  },
+  {
+    question: "5) Какой метод используется для удаления последнего элемента из массива в JavaScript?",
+    options: ["push()", "pop()", "shift()", "unshift()"],
+    correctAnswer: 2
+  },
+  {
+    question: "6) Какой метод используется для объединения двух массивов в JavaScript?",
+    options: ["concat()", "join()", "slice()", "splice()"],
+    correctAnswer: 1
+  },
+  {
+    question: "7) Какой метод используется для удаления элемента из массива по индексу в JavaScript?",
+    options: ["concat()", "join()", "slice()", "splice()"],
+    correctAnswer: 4
+  },
+  {
+    question: "8) Как получить длину массива в JavaScript?",
+    options: ["метод length()", "метод size()", "метод count()", "значение length"],
+    correctAnswer: 4
+  },
+  {
+    question: "9) Что такое AJAX в JavaScript?",
+    options: ["Asynchronous JavaScript and XML", "Advanced JavaScript and XML", "Asynchronous JavaScript and XHTML", "Advanced JavaScript and XHTML"],
+    correctAnswer: 1
+  },
+  {
+    question: "10) Какой метод используется для преобразования строки в число в JavaScript?",
+    options: ["parseInt()", "parseFloat()", "toString()", "toFixed()"],
+    correctAnswer: 1
+  }
+  ];
+  
+  var currentQuestionIndex = 0;
+  var userAnswers = [];
+  
+  function startTest() {
+    document.getElementById("testQuestions").style.display = "block";
+    document.getElementById("question").innerHTML = questions[currentQuestionIndex].question;
+    document.getElementById("option1Label").innerHTML = questions[currentQuestionIndex].options[0];
+    document.getElementById("option2Label").innerHTML = questions[currentQuestionIndex].options[1];
+    document.getElementById("option3Label").innerHTML = questions[currentQuestionIndex].options[2];
+    document.getElementById("option4Label").innerHTML = questions[currentQuestionIndex].options[3];
+  }
+  
+  function nextQuestion() {
+    var selectedOption = document.querySelector('input[name="answer"]:checked');
+    
+    if (selectedOption) {
+      var answer = parseInt(selectedOption.value);
+      userAnswers.push(answer);
+      
+      currentQuestionIndex++;
+      
+      if (currentQuestionIndex < questions.length) {
+        document.getElementById("question").innerHTML = questions[currentQuestionIndex].question;
+        document.getElementById("option1Label").innerHTML = questions[currentQuestionIndex].options[0];
+        document.getElementById("option2Label").innerHTML = questions[currentQuestionIndex].options[1];
+        document.getElementById("option3Label").innerHTML = questions[currentQuestionIndex].options[2];
+        document.getElementById("option4Label").innerHTML = questions[currentQuestionIndex].options[3];
+        
+        selectedOption.checked = false;
+      } else {
+        calculateTestResult();
+      }
+    } else {
+      alert("Пожалуйста, выберите один из вариантов ответа.");
+    }
+  }
+  
+  function calculateTestResult() {
+    var correctAnswers = 0;
+    
+    for (var i = 0; i < questions.length; i++) {
+      if (userAnswers[i] === questions[i].correctAnswer) {
+        correctAnswers++;
+      }
+    }
+    
+    var result = "Вы ответили правильно на " + correctAnswers + " из " + questions.length + " вопросов.";
+    
+    document.getElementById("testQuestions").style.display = "none";
+    document.getElementById("testResult").style.display = "block";
+    document.getElementById("testResult").innerHTML = result;
+  }
+
+// 5) Заставка
+ function showOverlay() {
+    var overlay = document.getElementById("overlay");
+    var userName = document.getElementById("userName");
+    var currentDate = document.getElementById("currentDate");
+    
+    // Получение имени пользователя
+    var name = prompt("Введите ваше имя:");
+    userName.innerHTML = name;
+    
+    // Получение текущей даты
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    currentDate.innerHTML = day + "." + month + "." + year;
+    
+    // Установка стилей для заставки
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.backgroundColor = "rgba(200, 200, 200, 0.8)";
+    overlay.style.zIndex = "9999";
+    overlay.style.backgroundImage = "url('background.jpg')"; 
+    
+    // Запрет прокрутки страницы
+    document.body.style.overflow = "hidden";
+  }
+  
+  function hideOverlay() {
+    var overlay = document.getElementById("overlay");
+    
+    // Скрытие заставки
+    if (overlay.style.display = "flex") overlay.style.display = "none";
+    
+    // Включение прокрутки страницы
+    document.body.style.overflow = "auto";
+  }
+  document.body.addEventListener("mousedown", hideOverlay);
+
+    </script>
+
+</body>

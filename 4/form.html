@@ -1,0 +1,85 @@
+<form method="post" action="check.php" name="signup-form">
+<div class="form-element">
+<label>Фамилия<span style="color: red;">*</span></label>
+<input type="text" name="surname" pattern="[а-яА-Я0-9]+" required />
+</div>
+<div class="form-element">
+<label>Имя<span style="color: red;">*</span></label>
+<input type="text" name="name" pattern="[а-яА-Я0-9]+" required />
+</div>
+<div class="form-element">
+<label>Отчество</label>
+<input type="text" name="f_name" pattern="[а-яА-Я0-9]+"/>
+</div>
+<div class="form-element">
+<label>Пол<span style="color: red;">*</span></label>
+<input type="radio" name="gender" value="male" required />
+<label>М</label>
+<input type="radio" name="gender" value="female" />
+<label>Ж</label>
+</div>
+<div class="form-element">
+<label>Цвет глаз</label>
+<input type="color" name="eye" />
+</div>
+<div class="form-element">
+<label>Дата рождения<span style="color: red;">*</span></label>
+<input type="date" name="birth_date" required />
+</div>
+<div class="form-element">
+<label>Возраст</label>
+<input type="range" name="age" min="18" max="100"/>
+</div>
+<div class="form-element">
+<label>Место рождения<span style="color: red;">*</span></label>
+<input type="search" name="place" list="places" required />
+<datalist id="places">
+        <option value="Москва" />
+        <option value="Санкт-Петербург" />
+        <option value="Казань" />
+        <option value="Саратов" />
+        <option value="Энгельс" />
+    </datalist>
+</div>
+<div class="form-element">
+<label>Индекс<span style="color: red;">*</span></label>
+<input type="number" name="index" required />
+</div>
+<div class="form-element">
+<label>Адрес<span style="color: red;">*</span></label>
+<input type="text" name="adress" pattern="[а-яА-Я0-9]+" required />
+</div>
+<div class="form-element">
+<label>Дата регистрации<span style="color: red;">*</span></label>
+<input type="date" name="reg_date" required />
+</div>
+<div class="form-element">
+<label>Номер телефона<span style="color: red;">*</span></label>
+<input type="tel" name="phone" pattern="\+7\s?[-]{0,1}9[0-9]{2}[-]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" required />
+</div>
+<div class="form-element">
+<label>Email<span style="color: red;">*</span></label>
+<input type="email" name="email" required />
+</div>
+<div class="form-element">
+<label>Паспорт<span style="color: red;">*</span></label>
+<input type="file" name="passport" accept="image/jpeg" required />
+</div>
+<div class="form-element">
+<label>Откуда Вы узнали про наш магазин?</label>
+<input type="checkbox" name="self" />
+<label>Сам</label>
+<input type="checkbox" name="friends" />
+<label>От знакомых</label>
+<input type="checkbox" name="ads" />
+<label>Из рекламы</label>
+<input type="checkbox" name="random" />
+<label>Случайно</label>
+</div>
+<div class="form-element">
+<label>Я согласен на обработку моих персональных данных<span style="color: red;">*</span></label>
+<input type="checkbox" required />
+</div>
+<button type="reset">Очистить</button>
+<button type="submit" name="register" value="register">Отправить</button>
+</form>
